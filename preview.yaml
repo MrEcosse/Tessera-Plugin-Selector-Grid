@@ -1,0 +1,53 @@
+# What tools/preview.py shows (docs/PREVIEW.md): an activity selector (an input_select, as WHARP's) with more options than
+# fit on a small tile, so it pages; the same with Off left out; a TV's inputs; a Harmony hub's activities; a selector
+# that is unavailable; and a tile with no entity yet.
+tiles:
+  - tile: grid
+    name: Cinema activity
+    entity: input_select.cinema_activity
+    sizes: [1x1, 2x1, 1x2, 2x2, 3x3]
+  - tile: grid
+    name: Activity, no Off
+    entity: input_select.cinema_activity
+    options:
+      hide: ["Off"]
+    sizes: [2x2]
+  - tile: grid
+    name: TV inputs
+    entity: media_player.lounge_tv
+    sizes: [1x1, 2x1, 2x2]
+  - tile: grid
+    name: Harmony
+    entity: remote.harmony_hub
+    sizes: [2x1, 2x2]
+  - tile: grid
+    name: Bar sound
+    entity: select.bar_sound_mode
+    sizes: [2x1]
+  - tile: grid
+    name: Not set up
+    sizes: [1x1]
+
+states:
+  input_select.cinema_activity:
+    state: Watch Blu-ray
+    attributes:
+      friendly_name: Cinema activity
+      options: ["Off", Watch TV, Watch Blu-ray, Sky Q, Apple TV, Roku, Music, PlayStation, Xbox, Radio]
+  media_player.lounge_tv:
+    state: "on"
+    attributes:
+      friendly_name: Lounge TV
+      source: HDMI 2
+      source_list: [Live TV, HDMI 1, HDMI 2, HDMI 3, HDMI 4, Bluetooth]
+  remote.harmony_hub:
+    state: "on"
+    attributes:
+      friendly_name: Harmony Hub
+      current_activity: Watch a Movie
+      activity_list: [Watch TV, Watch a Movie, Listen to Music, Play Games]
+  select.bar_sound_mode:
+    state: unavailable
+    attributes:
+      friendly_name: Bar sound mode
+      options: [Stereo, Movie, Music, Night]

@@ -1,0 +1,15 @@
+{
+  "_meta": { "name": "English" },
+  "screen": {
+    "no_entity": "Choose a selector",
+    "no_options": "No options to show"
+  },
+  "app": {
+    "name": "Selector grid",
+    "summary": "Every option of a selector on screen at once, as keys: inputs, activities, favourites.",
+    "tile_name": "Selector grid",
+    "tile_example": "The options of a selector, a media player's inputs or a remote's activities, as a grid of keys",
+    "hide": "Leave out",
+    "hide_hint": "Options not to show, written as the selector writes them (such as Off). Leave it empty to show them all."
+  }
+}

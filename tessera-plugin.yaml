@@ -1,0 +1,45 @@
+# Selector grid: every option of a selector on the tile at once, as a grid of keys, instead of a list that opens on a
+# tap. The options come from the entity itself: an input_select's or select's options, a media player's inputs, a
+# remote's activities. A tap selects that option; the one in use is lit. When they do not all fit, the tile pages through
+# them with arrows. docs/MANIFEST.md has every field.
+id: selector_grid
+version: 0.1.0
+# 0.12 for a list option (multiple): the options to leave out. 0.10 for tessera::tap_point() and the lists in PSRAM.
+api: "0.12"
+icon: remote-tv
+maintainer: MrEcosse
+license: MIT
+stage: beta
+topics: [media, home]
+requires:
+  esphome: 2026.6.2
+boards: any
+flash_kb: 8
+
+permissions:
+  # One of these, chosen by the entity's domain, with the option's own name. The tile sends nothing else.
+  home_assistant_actions:
+    - input_select.select_option
+    - select.select_option
+    - media_player.select_source
+    - remote.turn_on
+
+tiles:
+  - id: grid
+    name: tile_name
+    icon: remote-tv
+    # From one cell (a few options and the arrows) to 4x4. A key is never smaller than a finger, so a larger tile shows
+    # more of them at once, up to twelve.
+    sizes: { min: 1x1, max: 4x4 }
+    # Up to twelve keys (a block and a label of two lines each), the arrows and the page number, a line for a tile with
+    # nothing to show, and up to 64 options of 48 bytes kept in the tile (PSRAM where the board has it).
+    memory: 6000
+    # The entity whose options the tile shows. Each domain has its own list and its own action (README, "Where the
+    # options come from").
+    domains: [input_select, select, media_player, remote]
+    # input_select and select: options. media_player: source_list and source. remote: activity_list and
+    # current_activity.
+    attributes: [options, source_list, source, activity_list, current_activity]
+    example: tile_example
+    options:
+      - { id: hide, kind: text, multiple: 16, label: hide, hint: hide_hint }
